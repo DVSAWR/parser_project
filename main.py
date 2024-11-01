@@ -294,31 +294,24 @@ async def main():
     semaphore = asyncio.Semaphore(160)
     try:
 
-        # await process_categories(redis)
+        await process_categories(redis)
 
-        # await process_all_categories_links(redis, semaphore)
+        await process_all_categories_links(redis, semaphore)
 
-        # product_links = await redis.smembers("product_links_set")
-        # product_links = [link.decode("utf-8") for link in product_links]
-        # logging.info(f"STATISTIC Total product links: {len(product_links)}")
+        product_links = await redis.smembers("product_links_set")
+        product_links = [link.decode("utf-8") for link in product_links]
 
         products_data = await redis.lrange("products_data", 0, -1)
 
         products = []
-
-        counter = 1
-
         for product_json in products_data:
             product = json.loads(product_json)
             products.append(product)
-            logging.info(f"Succes append. TOTAL: {counter}")
-            counter += 1
 
         dataframe = pandas.DataFrame(products)
 
         excel_filename = "products_data.xlsx"
         dataframe.to_excel(excel_filename, index=False)
-        logging.info(f"OPERATION COMPLITE! EXCEL: {excel_filename}")
 
     finally:
         await redis.aclose()
