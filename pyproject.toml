@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "verba-test-project"
+version = "0.1.0"
+description = ""
+authors = ["Daniil Gruzdev <gruzdev.daniil@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.2.3"
+requests = "^2.32.3"
+beautifulsoup4 = "^4.12.3"
+lxml = "^5.3.0"
+selenium = "^4.25.0"
+webdriver-manager = "^4.0.2"
+openpyxl = "^3.1.5"
+isort = "^5.13.2"
+aiohttp = "^3.10.10"
+redis = "^5.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
